@@ -27,21 +27,18 @@
   font-family: Archivo, system-ui, sans-serif !important;
 }
 
-/* Month/year title — right side with flex-grow to push nav buttons */
+/* Month/year title — centered with flex-grow */
 .dhx_cal_date {
   color: #FFFFFF !important;
   font-family: Georgia, serif !important;
   font-weight: 600 !important;
-  flex-grow: 1 !important;
-  text-align: right !important;
-  padding-right: 8px !important;
-  order: 1 !important;
+  flex: 1 1 0% !important;
+  text-align: center !important;
 }
 
-/* Group all tab buttons together on the left */
+/* Tab buttons — no grow, stay grouped left */
 .dhx_cal_tab {
-  flex-shrink: 0 !important;
-  order: 0 !important;
+  flex: 0 0 auto !important;
 }
 
 /* Keep standalone tabs flush with segmented group */
@@ -49,9 +46,9 @@
   margin-left: 0 !important;
 }
 
-/* Push nav buttons (prev/today/next) to the right after date */
+/* Nav buttons — no grow, stay grouped right */
 .dhx_cal_nav_button {
-  order: 2 !important;
+  flex: 0 0 auto !important;
 }
 
 /* Navigation buttons (prev/next) */
