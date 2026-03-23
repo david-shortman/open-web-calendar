@@ -20,25 +20,31 @@
   background-color: #FFFFFF !important;
 }
 
-/* Header / toolbar — sage green */
+/* Header / toolbar — sage green, relative for absolute date centering */
 .dhx_cal_navline {
   background-color: #6b7b5e !important;
   color: #FFFFFF !important;
   font-family: Archivo, system-ui, sans-serif !important;
+  position: relative !important;
+  justify-content: space-between !important;
 }
 
-/* Month/year title — centered with flex-grow */
+/* Month/year title — true center via absolute overlay */
 .dhx_cal_date {
   color: #FFFFFF !important;
   font-family: Georgia, serif !important;
   font-weight: 600 !important;
-  flex: 1 1 0% !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
   text-align: center !important;
+  pointer-events: none !important;
 }
 
-/* Tab buttons — no grow, stay grouped left */
+/* Tab buttons — stay grouped left */
 .dhx_cal_tab {
-  flex: 0 0 auto !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 /* Keep standalone tabs flush with segmented group */
@@ -46,9 +52,16 @@
   margin-left: 0 !important;
 }
 
-/* Nav buttons — no grow, stay grouped right */
+/* Spacer between tabs and nav buttons */
+.dhx_cal_navline::after {
+  content: '' !important;
+  flex: 1 1 0% !important;
+}
+
+/* Nav buttons — stay grouped right, above the absolute date */
 .dhx_cal_nav_button {
-  flex: 0 0 auto !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 /* Navigation buttons (prev/next) */
