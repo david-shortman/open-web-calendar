@@ -164,3 +164,13 @@
 .dhx_cal_data::-webkit-scrollbar-thumb:hover {
   background-color: #7A7A6E;
 }
+
+/* Hide OWC hamburger menu */
+.hamburger-menu {
+  display: none !important;
+}
+
+/* Hide the ? help/info button in bottom right */
+#owc-info {
+  display: none !important;
+}
