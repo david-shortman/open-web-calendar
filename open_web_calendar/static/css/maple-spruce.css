@@ -1,0 +1,178 @@
+/*
+ * Maple & Spruce Folk Arts Collective
+ * Custom theme for Open Web Calendar
+ *
+ * Brand Colors:
+ *   Sage Green:  #6b7b5e  (primary)
+ *   Dark Brown:  #4A3728
+ *   Warm Gray:   #7A7A6E
+ *   Cream:       #D5D6C8
+ *   Off Black:   #1A1A1A
+ *   BG Secondary:#E6E7DF
+ *   White:       #FFFFFF
+ *
+ * Fonts: Georgia (headings + body), Archivo (buttons)
+ */
+
+/* Calendar container */
+.dhx_cal_container {
+  font-family: Georgia, serif !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Header / toolbar — sage green */
+.dhx_cal_navline {
+  background-color: #6b7b5e !important;
+  color: #FFFFFF !important;
+  font-family: Archivo, system-ui, sans-serif !important;
+}
+
+/* Month/year title */
+.dhx_cal_date {
+  color: #FFFFFF !important;
+  font-family: Georgia, serif !important;
+  font-weight: 600 !important;
+}
+
+/* Navigation buttons (prev/next) */
+.dhx_cal_prev_button,
+.dhx_cal_next_button {
+  color: #FFFFFF !important;
+}
+
+/* Today button */
+.dhx_cal_today_button {
+  color: #FFFFFF !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 4px !important;
+  font-family: Archivo, system-ui, sans-serif !important;
+}
+
+.dhx_cal_today_button:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Tab buttons (Month/Week/Agenda) */
+.dhx_cal_tab {
+  color: rgba(255, 255, 255, 0.8) !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 4px !important;
+  font-family: Archivo, system-ui, sans-serif !important;
+}
+
+.dhx_cal_tab.active,
+.dhx_cal_tab_active {
+  background-color: #4A3728 !important;
+  color: #FFFFFF !important;
+  border-color: #4A3728 !important;
+}
+
+/* Day headers (Sunday, Monday...) */
+.dhx_scale_bar {
+  color: #4A3728 !important;
+  font-weight: 600 !important;
+  background-color: #E6E7DF !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Today cell highlight */
+.dhx_now .dhx_month_head,
+.dhx_now .dhx_month_body {
+  background-color: rgba(107, 123, 94, 0.08) !important;
+}
+
+/* Date numbers in month view */
+.dhx_month_head {
+  color: #1A1A1A !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Event bars — sage green */
+.dhx_cal_event_line {
+  background-color: #6b7b5e !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Multi-day/timed events */
+.dhx_cal_event .dhx_body {
+  background-color: #6b7b5e !important;
+  color: #FFFFFF !important;
+  font-family: Georgia, serif !important;
+}
+
+.dhx_cal_event .dhx_title {
+  background-color: #4A3728 !important;
+  color: #FFFFFF !important;
+}
+
+/* Event with dot indicator in month view */
+.dhx_cal_event_line .dhx_event_icon {
+  color: #6b7b5e !important;
+}
+
+/* Cell borders — subtle */
+.dhx_scale_holder,
+.dhx_month_body,
+.dhx_month_head {
+  border-color: rgba(26, 26, 26, 0.08) !important;
+}
+
+/* Agenda/list view */
+.dhx_agenda_area .dhx_agenda_line {
+  border-bottom-color: rgba(26, 26, 26, 0.08) !important;
+  font-family: Georgia, serif !important;
+}
+
+.dhx_agenda_area .dhx_agenda_line .dhx_event_icon {
+  color: #6b7b5e !important;
+}
+
+/* Week view time scale */
+.dhx_scale_hour {
+  color: #7A7A6E !important;
+  font-size: 11px !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Event detail popup */
+.dhx_cal_light {
+  font-family: Georgia, serif !important;
+}
+
+.dhx_cal_light .dhx_title {
+  background-color: #6b7b5e !important;
+  color: #FFFFFF !important;
+}
+
+/* Scrollbar */
+.dhx_cal_data::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dhx_cal_data::-webkit-scrollbar-thumb {
+  background-color: #D5D6C8;
+  border-radius: 3px;
+}
+
+.dhx_cal_data::-webkit-scrollbar-thumb:hover {
+  background-color: #7A7A6E;
+}
+
+/* Hide OWC hamburger menu */
+.hamburger-menu {
+  display: none !important;
+}
+
+/* Hide the ? help/info button in bottom right */
+.dhx_cal_container .owc-info,
+.dhx_cal_container a[href*="open-web-calendar"],
+#owc-info {
+  display: none !important;
+}
