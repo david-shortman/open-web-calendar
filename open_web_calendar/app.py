@@ -96,15 +96,20 @@ def add_header(r):
     Add headers to both force latest IE rendering engine or Chrome Frame,
     and also to cache the rendered page for 10 minutes.
     """
-    if not request.path.startswith("/static/"):
-        r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-        r.headers["Pragma"] = "no-cache"
-        r.headers["Expires"] = "0"
-    else:
+    if request.path.startswith("/static/"):
         r.headers["Cache-Control"] = "public, max-age=31536000"  # Cache for 1 year
         r.headers["Expires"] = (
             datetime.datetime.now() + datetime.timedelta(days=365)
         ).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    elif request.path.startswith("/calendar."):
+        # Cache calendar endpoints at Vercel's edge for 5 minutes.
+        # stale-while-revalidate lets the edge serve stale content instantly
+        # while refreshing in the background, avoiding cold-start delays.
+        r.headers["Cache-Control"] = "public, s-maxage=300, stale-while-revalidate=600"
+    else:
+        r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        r.headers["Pragma"] = "no-cache"
+        r.headers["Expires"] = "0"
 
     return r
 
