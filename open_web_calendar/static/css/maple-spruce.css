@@ -64,10 +64,49 @@
   z-index: 1 !important;
 }
 
-/* Navigation buttons (prev/next) */
+/* Navigation buttons (prev/next) — white chevrons on sage, with a clearly
+ * visible hover/focus ring so the touch target reads as a button. */
 .dhx_cal_prev_button,
 .dhx_cal_next_button {
   color: #FFFFFF !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 50% !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+/* The actual chevron glyphs are rendered via :before with the dhtmlx icon
+ * font; its color defaults to a low-contrast gray, so force white. */
+.dhx_cal_prev_button:before,
+.dhx_cal_next_button:before {
+  color: #FFFFFF !important;
+}
+
+.dhx_cal_prev_button:hover,
+.dhx_cal_next_button:hover,
+.dhx_cal_prev_button:focus-visible,
+.dhx_cal_next_button:focus-visible {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+}
+
+.dhx_cal_prev_button:hover:before,
+.dhx_cal_next_button:hover:before,
+.dhx_cal_prev_button:focus-visible:before,
+.dhx_cal_next_button:focus-visible:before {
+  color: #FFFFFF !important;
+}
+
+/* Larger touch targets on mobile / coarse pointers */
+@media (max-width: 600px), (pointer: coarse) {
+  .dhx_cal_prev_button,
+  .dhx_cal_next_button {
+    min-width: 44px !important;
+    height: 44px !important;
+  }
 }
 
 /* Today button */
