@@ -116,6 +116,7 @@
   border: 1px solid rgba(255, 255, 255, 0.5) !important;
   border-radius: 4px !important;
   font-family: Archivo, system-ui, sans-serif !important;
+  margin: 0 8px !important;
 }
 
 .dhx_cal_today_button:hover {
