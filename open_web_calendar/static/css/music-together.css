@@ -1,0 +1,208 @@
+/*
+ * Music Together with Maple & Spruce
+ * Custom theme for Open Web Calendar (purple program accent)
+ *
+ * Brand Colors:
+ *   MT Purple:      #9066C9  (events)
+ *   MT Deep Purple: #6E45A8  (toolbar / titles)
+ *   MT Tint:        #EFE8F8  (day-header band, today highlight)
+ *   Dark Brown:     #4A3728  (active tab, day numbers)
+ *   Warm Gray:      #7A7A6E
+ *   Cream:          #D5D6C8
+ *   Off Black:      #1A1A1A
+ *   White:          #FFFFFF
+ *
+ * Fonts: Georgia (headings + body), Archivo (buttons)
+ * Mirrors maple-spruce.css structure with the MT purple palette.
+ */
+
+/* Calendar container */
+.dhx_cal_container {
+  font-family: Georgia, serif !important;
+  background-color: #FFFFFF !important;
+}
+
+/* Header / toolbar — deep purple, relative for absolute date centering */
+.dhx_cal_navline {
+  background-color: #6E45A8 !important;
+  color: #FFFFFF !important;
+  font-family: Archivo, system-ui, sans-serif !important;
+  position: relative !important;
+  justify-content: space-between !important;
+}
+
+/* Month/year title — true center via absolute overlay */
+.dhx_cal_date {
+  color: #FFFFFF !important;
+  font-family: Georgia, serif !important;
+  font-weight: 600 !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+  pointer-events: none !important;
+}
+
+/* Tab buttons — stay grouped left */
+.dhx_cal_tab {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Keep standalone tabs flush with segmented group */
+.dhx_cal_tab_standalone {
+  margin-left: 0 !important;
+}
+
+/* Spacer between tabs and nav buttons */
+.dhx_cal_navline::after {
+  content: '' !important;
+  flex: 1 1 0% !important;
+}
+
+/* Nav buttons — stay grouped right, above the absolute date */
+.dhx_cal_nav_button {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Navigation buttons (prev/next) */
+.dhx_cal_prev_button,
+.dhx_cal_next_button {
+  color: #FFFFFF !important;
+}
+
+/* Today button */
+.dhx_cal_today_button {
+  color: #FFFFFF !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 4px !important;
+  font-family: Archivo, system-ui, sans-serif !important;
+}
+
+.dhx_cal_today_button:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Tab buttons (Month/Week/Agenda) */
+.dhx_cal_tab {
+  color: rgba(255, 255, 255, 0.8) !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 4px !important;
+  font-family: Archivo, system-ui, sans-serif !important;
+}
+
+.dhx_cal_tab.active,
+.dhx_cal_tab_active {
+  background-color: #4A3728 !important;
+  color: #FFFFFF !important;
+  border-color: #4A3728 !important;
+}
+
+/* Day headers (Sunday, Monday...) — light purple band */
+.dhx_scale_bar {
+  color: #4A3728 !important;
+  font-weight: 600 !important;
+  background-color: #EFE8F8 !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Today cell highlight — purple tint */
+.dhx_now .dhx_month_head,
+.dhx_now .dhx_month_body {
+  background-color: rgba(144, 102, 201, 0.10) !important;
+}
+
+/* Date numbers in month view */
+.dhx_month_head {
+  color: #1A1A1A !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Event bars — MT purple */
+.dhx_cal_event_line {
+  background-color: #9066C9 !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Multi-day/timed events */
+.dhx_cal_event .dhx_body {
+  background-color: #9066C9 !important;
+  color: #FFFFFF !important;
+  font-family: Georgia, serif !important;
+}
+
+.dhx_cal_event .dhx_title {
+  background-color: #6E45A8 !important;
+  color: #FFFFFF !important;
+}
+
+/* Event with dot indicator in month view */
+.dhx_cal_event_line .dhx_event_icon {
+  color: #9066C9 !important;
+}
+
+/* Cell borders — subtle */
+.dhx_scale_holder,
+.dhx_month_body,
+.dhx_month_head {
+  border-color: rgba(26, 26, 26, 0.08) !important;
+}
+
+/* Agenda/list view */
+.dhx_agenda_area .dhx_agenda_line {
+  border-bottom-color: rgba(26, 26, 26, 0.08) !important;
+  font-family: Georgia, serif !important;
+}
+
+.dhx_agenda_area .dhx_agenda_line .dhx_event_icon {
+  color: #9066C9 !important;
+}
+
+/* Week view time scale */
+.dhx_scale_hour {
+  color: #7A7A6E !important;
+  font-size: 11px !important;
+  font-family: Georgia, serif !important;
+}
+
+/* Event detail popup */
+.dhx_cal_light {
+  font-family: Georgia, serif !important;
+}
+
+.dhx_cal_light .dhx_title {
+  background-color: #9066C9 !important;
+  color: #FFFFFF !important;
+}
+
+/* Scrollbar */
+.dhx_cal_data::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dhx_cal_data::-webkit-scrollbar-thumb {
+  background-color: #D5C8E6;
+  border-radius: 3px;
+}
+
+.dhx_cal_data::-webkit-scrollbar-thumb:hover {
+  background-color: #9066C9;
+}
+
+/* Hide OWC hamburger menu */
+.hamburger-menu {
+  display: none !important;
+}
+
+/* Hide the ? help/info button in bottom right */
+#owc-info {
+  display: none !important;
+}
