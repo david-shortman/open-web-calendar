@@ -64,25 +64,71 @@ function makeLink(url, html) {
 
 
 /*
- * Download the vent ICS with a file name.
+ * Trigger a browser download of the given text as a same-origin blob.
+ *
+ * Using a blob URL (rather than pointing an <a download> at the cross-origin
+ * calendar.ics endpoint) keeps the download same-origin, so the `download`
+ * attribute is always honoured. When the calendar is embedded in a
+ * cross-origin iframe, an `<a download target="_blank">` pointing at the
+ * server endpoint is unreliable: some browsers (notably Safari) ignore the
+ * download attribute and navigate instead, which can save an HTML page
+ * instead of the .ics file. See issue: event "Add to Calendar" saved .html.
  */
-function downloadICS(event) {
-    // from https://stackoverflow.com/a/18197341/1320237
+function downloadTextAsFile(text, filename, mimeType) {
+    const blob = new Blob([text], { type: mimeType });
+    const blobUrl = URL.createObjectURL(blob);
     const element = document.createElement('a');
-    const convert = scheduler.date.date_to_str("%Y-%m-%d %H%i", false);
-    const filename = convert(event.start_date).replace(" 0000", "") +
-    " " + event.text.replace(/[/:\\]/g, "-") + ".ics";
-    let url = document.location.href.replace("/calendar.html", "/calendar.ics") + 
-        "&filename=" + encodeURIComponent(filename) + 
-        "&set_event=" + encodeURIComponent(event.ical);
-    element.setAttribute('href', url);
+    element.setAttribute('href', blobUrl);
     element.setAttribute('download', filename);
-
     element.style.display = 'none';
-    element.target = "_blank";
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+    // Revoke on the next tick so the browser has started the download.
+    setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+}
+
+/*
+ * Build the calendar.ics URL for a single event, derived from the current
+ * page URL. Uses pathname.replace so it works regardless of how the calendar
+ * is embedded (mirrors how the .json / .events.json URLs are built below).
+ */
+function eventICSUrl(event, filename) {
+    const icsPath = document.location.pathname.replace(/\.html$/, ".ics");
+    const search = document.location.search || "?";
+    return icsPath + search +
+        (search === "?" ? "" : "&") +
+        "filename=" + encodeURIComponent(filename) +
+        "&set_event=" + encodeURIComponent(event.ical);
+}
+
+/*
+ * Download the event ICS with a file name.
+ */
+function downloadICS(event) {
+    const convert = scheduler.date.date_to_str("%Y-%m-%d %H%i", false);
+    const filename = convert(event.start_date).replace(" 0000", "") +
+    " " + event.text.replace(/[/:\\]/g, "-") + ".ics";
+    const url = eventICSUrl(event, filename);
+    fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("calendar.ics request failed: " + response.status);
+            }
+            return response.text();
+        })
+        .then((text) => {
+            // Guard against ever saving an error page as the .ics file.
+            if (!text.startsWith("BEGIN:VCALENDAR")) {
+                throw new Error("calendar.ics did not return a calendar");
+            }
+            downloadTextAsFile(text, filename, "text/calendar;charset=utf-8");
+        })
+        .catch((error) => {
+            console.error("Could not add event to calendar", error);
+            // Last resort: open the ICS URL directly so the user still gets it.
+            window.open(url, "_blank");
+        });
 }
 
 /*
