@@ -10,11 +10,12 @@ import datetime
 import json
 import os
 import traceback
+import unicodedata
 import zoneinfo
 from http import HTTPStatus
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
-from urllib.parse import ParseResult, unquote, urlparse
+from urllib.parse import ParseResult, quote, unquote, urlparse
 
 import caldav
 import icalendar
@@ -142,7 +143,27 @@ def set_js_headers(response):
         response.headers["Content-Type"] = "text/calendar"
     filename = request.args.get("filename")
     if filename:
-        response.headers.add("Content-Disposition", "attachment", filename=filename)
+        # HTTP header values must be Latin-1 encodable. A filename containing
+        # non-Latin-1 characters (e.g. em/en dashes in an event title) would
+        # otherwise crash the WSGI header encoding with a 500. Emit an ASCII
+        # fallback plus an RFC 5987 UTF-8 `filename*` so calendar apps still
+        # get the correct name.
+        safe_name = filename.replace('"', "")
+        try:
+            safe_name.encode("latin-1")
+            disposition = 'attachment; filename="%s"' % safe_name
+        except UnicodeEncodeError:
+            ascii_name = (
+                unicodedata.normalize("NFKD", safe_name)
+                .encode("ascii", "ignore")
+                .decode("ascii")
+                or "calendar.ics"
+            )
+            disposition = "attachment; filename=\"%s\"; filename*=UTF-8''%s" % (
+                ascii_name,
+                quote(filename, safe=""),
+            )
+        response.headers["Content-Disposition"] = disposition
     return response
 
 
