@@ -371,6 +371,12 @@ function loadCalendar() {
     // set the locale
     // loaded from /locale_<lang>.js
     // see also https://docs.dhtmlx.com/scheduler/api__scheduler_locale_other.html
+    // Use short day names (Sun, Mon, ...) for column headers everywhere — the
+    // full names ("Sunday Monday Tuesday...") overflow column width on mobile
+    // and render as concatenated/chopped text.
+    if (OWCLocale.date && OWCLocale.date.day_short) {
+        OWCLocale.date.day_full = OWCLocale.date.day_short.slice();
+    }
     scheduler.i18n.setLocale(OWCLocale);
     // load plugins, see https://docs.dhtmlx.com/scheduler/migration_from_older_version.html#5360
     scheduler.plugins({
