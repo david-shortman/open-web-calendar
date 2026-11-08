@@ -406,3 +406,9 @@
 #owc-info {
   display: none !important;
 }
+
+/* The embedding page sized the iframe to the agenda (js/maple-spruce.js), so
+ * the agenda has nothing to scroll: drop its empty scrollbar track. */
+.ms-auto-height .dhx_scheduler_agenda .dhx_cal_data {
+  overflow-y: hidden !important;
+}
