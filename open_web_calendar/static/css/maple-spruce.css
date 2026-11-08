@@ -320,16 +320,31 @@
 /* Phone header: title and arrows on one row, a single segmented
  * Week | Month | Agenda control with Today on the right on the next. */
 @media (max-width: 600px) {
+  /* Rows must not outgrow the frame: the Webflow embed is ~343px wide on a
+   * phone, and dhtmlx gives each tab a 90px min-width, which pushed the
+   * next arrow and Today off the edge. */
+  .dhx_cal_navbar_rows_container {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
   .dhx_cal_navbar_row {
     display: flex !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
     gap: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
   }
 
   .dhx_cal_navline .dhx_cal_date {
     position: static !important;
     flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
     padding-left: 8px !important;
     text-align: left !important;
     font-size: 22px !important;
@@ -345,7 +360,11 @@
   }
 
   .dhx_cal_tab {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
     margin: 0 !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
     border-radius: 0 !important;
   }
 
@@ -358,6 +377,7 @@
   }
 
   .dhx_cal_today_button {
+    flex: 0 0 auto !important;
     margin: 0 0 0 auto !important;
   }
 
@@ -403,6 +423,7 @@
 }
 
 /* Hide the ? help/info button in bottom right */
-#owc-info {
+#owc-info,
+#infoIcon {
   display: none !important;
 }
